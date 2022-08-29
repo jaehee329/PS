@@ -2,27 +2,26 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
-public class a1463 {
+import java.util.HashMap;
+import java.util.StringTokenizer;
+import java.util.HashSet;
+public class a11726 {
     static Integer[] ans;
     public static void main(String[] args) throws IOException{
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int N = Integer.parseInt(br.readLine());
-        ans = new Integer[N+1]; ans[0]=0; ans[1]=0;
-        System.out.println(func(N));
-    }
-
-    public static int func(int N){
-        if(ans[N]==null){
-            if(N%6==0){
-                ans[N] = Math.min(Math.min(func(N/3), func(N/2)), func(N-1))+1;
-            } else if(N%3==0){
-                ans[N] = Math.min(func(N/3), func(N-1))+1;
-            } else if(N%2==0){
-                ans[N] = Math.min(func(N/2), func(N-1))+1;
-            } else {
-                ans[N] = func(N-1)+1;
-            }
+        HashMap<String, HashMap<String, Integer>> result = new HashMap<>();
+        String[] report = {"muzi frodo", "apeach frodo", "frodo neo", "muzi neo", "apeach muzi"};
+        
+        for(String rpt : report){
+            StringTokenizer st = new StringTokenizer(rpt);
+            String reporter = st.nextToken();
+            String reporting = st.nextToken();
+            HashMap<String, Integer> rpter = new HashMap<>();
+            rpter.put(reporter, 1);
+            result.put(reporting, rpter);
+            System.out.println(rpter.size());
         }
-        return ans[N];
+        System.out.println(result);
+        System.out.println(result.size());
+        System.out.println(result.get("frodo").size());
     }
 }

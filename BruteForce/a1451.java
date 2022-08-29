@@ -1,4 +1,5 @@
 // 진짜 노가다중 노가다 문제.. 풀지 말자 이런거 경우 나눠서 메소드도 못 빼고 다 따져서 해야 함
+// 그나마 유의할 건 사각형 정수 합을 long으로 저장해야 한다는 것.
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
