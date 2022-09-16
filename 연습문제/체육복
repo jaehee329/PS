@@ -11,18 +11,21 @@ class Solution {
             if(!needs[i]){
                 remain[i] = true;
             } else {
+                needs[i] = false;
                 answer++;
             }
         }
-        for(int i: lost) {
-            for(int j=i-1; j<=i+1; j++) {
-                try {
-                    if(remain[j]==true){
-                        remain[j]=false;
-                        answer++;
-                        break;
-                    }
-                } catch(Exception e) {}
+        for(int i=1; i<n+1; i++) {
+            if(needs[i]){
+                for(int j=i-1; j<=i+1; j++) {
+                    try {
+                        if(remain[j]==true){
+                            remain[j]=false;
+                            answer++;
+                            break;
+                        }
+                    } catch(Exception e) {}
+                }
             }
         }
         return answer;
