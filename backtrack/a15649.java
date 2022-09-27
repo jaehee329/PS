@@ -17,11 +17,11 @@ public class a15649 {
         seq = new int[N+1];
         used = new boolean[N+1];
         
-        backTrackFromGivenIdx(0);
+        backTrackFromGivenIdx(0, 0);
 
         System.out.println(sb);
     }
-    private static void backTrackFromGivenIdx(int idx) {
+    private static void backTrackFromGivenIdx(int idx, int biggerThan) {
         if(idx == M) {
             for(int i=0; i<M; i++) {
                 sb.append(seq[i]+" ");
@@ -30,10 +30,10 @@ public class a15649 {
             return;
         }
         for(int i=1; i<=N; i++) {
-            if(!used[i]){
+            if(!used[i] && i>biggerThan){
                 used[i] = true;
                 seq[idx] = i;
-                backTrackFromGivenIdx(idx+1);
+                backTrackFromGivenIdx(idx+1, i);
                 used[i] = false;
             }
         }
