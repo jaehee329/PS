@@ -1,0 +1,47 @@
+// int크기의 정수를 k진수로 변환 과정에서 int범위를 넘어가는 경우가 발생한다. 변환 후에는 long으로 처리함에 유의
+import java.util.*;
+class Solution {
+    public int solution(int n, int k) {
+        String kBitString = toKBitString(n, k);
+        ArrayList<Long> probablePArr = parsePFromString(kBitString);
+        int numOfPrimes = getNumOfPrimesFromArr(probablePArr);
+        return numOfPrimes;
+    }
+    private static String toKBitString(int n, int k) {
+        StringBuilder sb = new StringBuilder();
+        while(n>=1) {
+            sb.append(n%k);
+            n /= k;
+        }
+        return sb.reverse().toString();
+    }
+    private static ArrayList parsePFromString(String kBitString) {
+        ArrayList<Long> probablePArr = new ArrayList<>();
+        StringTokenizer st = new StringTokenizer(kBitString,"0");
+        while(st.hasMoreTokens()) {
+            Long target = Long.parseLong(st.nextToken());
+            if(target != 1) {
+                probablePArr.add(target);
+            }
+        }
+        return probablePArr;
+    }
+    private static int getNumOfPrimesFromArr(ArrayList<Long> arr) {
+        int numOfPrimes = 0;
+        int arrSize = arr.size();
+        for(int i=0; i<arrSize; i++) {
+            if(isPrime(arr.get(i))){
+                numOfPrimes++;
+            }
+        }
+        return numOfPrimes;
+    }
+    private static boolean isPrime(long n) {
+        for(int i=2; i<=(long)Math.sqrt(n); i++) {
+            if(n%i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
