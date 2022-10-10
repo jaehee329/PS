@@ -13,7 +13,7 @@ public class a14888 {
  
 	public static void main(String[] args) throws IOException {
 		setStaticVar();
-		bruteForce(number[0], 1);
+		bruteforce(number[0], 1);
  
 		System.out.println(Max);
 		System.out.println(Min);
@@ -36,7 +36,7 @@ public class a14888 {
 		}
 	}
  
-	public static void bruteForce(int num, int idx) {
+	public static void bruteforce(int num, int idx) {
 		if (idx == N) {
 			Max = (Max < num) ? num : Max;
 			Min = (Min > num) ? num : Min;
@@ -48,16 +48,16 @@ public class a14888 {
 				operator[i]--;
 				switch (i) {
 				    case 0:
-						bruteForce(num+number[idx], idx+1);
+						bruteforce(num+number[idx], idx+1);
 						break;
 				    case 1:
-						bruteForce(num-number[idx], idx+1);
+						bruteforce(num-number[idx], idx+1);
 						break;
 				    case 2:	
-						bruteForce(num*number[idx], idx+1);	
+						bruteforce(num*number[idx], idx+1);	
 						break;
 				    case 3:	
-						bruteForce(num/number[idx], idx+1);	
+						bruteforce(num/number[idx], idx+1);	
 						break;
 				}
 				operator[i]++;
