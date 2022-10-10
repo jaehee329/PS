@@ -29,5 +29,6 @@ public class a2805 {
                 lowest = target+1;
         }
         System.out.println(lowest-1);
+        }
     }
 }
