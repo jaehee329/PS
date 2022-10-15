@@ -1,7 +1,7 @@
+// 0-1 knapsack, DP
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class s5215 {
@@ -12,7 +12,7 @@ public class s5215 {
         for(int i=1; i<=tc; i++) {
             addBestCombination(i, br, sb);
         }
-        // sb.setLength(sb.length()-1);
+        sb.setLength(sb.length()-1);
         System.out.println(sb);
     }
 
@@ -20,34 +20,23 @@ public class s5215 {
         StringTokenizer st = new StringTokenizer(br.readLine());
         int N = Integer.parseInt(st.nextToken());
         int maxCal = Integer.parseInt(st.nextToken());
-        int[][] scoreCal = new int[N][2];
-        for(int i=0; i<N; i++) {
+        int[][] scoreCal = new int[N+1][2];
+        for(int i=1; i<=N; i++) {
             st = new StringTokenizer(br.readLine());
             scoreCal[i][0] = Integer.parseInt(st.nextToken());
             scoreCal[i][1] = Integer.parseInt(st.nextToken());
         }
-        Arrays.sort(scoreCal, (a,b) -> 1000*b[1]/b[0] - 1000*a[1]/a[0]);
-        
-        int cal = 0;
-        int score = 0;
-        for(int i=0; i<N; i++) {
-            if(cal <= maxCal-scoreCal[i][1]) {
-                System.out.println("adding score = "+ scoreCal[i][0] + " cal = " + scoreCal[i][1]);
-                score += scoreCal[i][0];
-                cal += scoreCal[i][1];
-            } else {
-                break;
+        int[][] dp = new int[N+1][maxCal+1];
+        for(int i=1; i<=N; i++) {
+            for(int j=1; j<=maxCal; j++) {
+                if(scoreCal[i][1]>j) {
+                    dp[i][j] = dp[i-1][j];
+                } else {
+                    dp[i][j] = Math.max(scoreCal[i][0] + dp[i-1][j-scoreCal[i][1]], dp[i-1][j]);
+                }
             }
         }
-        
-        sb.append("#" + idx + " " + score);
+        int bestScore = dp[N][maxCal];
+        sb.append("#" + idx + " " + bestScore + "\n");
     }
 }
-
-// 1
-// 5 1000
-// 100 200
-// 300 500
-// 250 300
-// 500 1000
-// 400 400
