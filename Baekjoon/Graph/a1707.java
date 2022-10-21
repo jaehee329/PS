@@ -1,3 +1,4 @@
+// BFS로 순환고리의 정점 개수가 홀수인지 확인 -> visit배열에 group을 직접 부여
 import java.io.*;
 import java.util.*;
 
