@@ -1,5 +1,4 @@
 import java.io.*;
-import java.util.*;
 
 public class a2108 {
     public static void main(String[] args) throws IOException {
@@ -16,33 +15,35 @@ public class a2108 {
             max = (max < num) ? num : max;
             sum += num;
         }
+
         int median = 0;
-		int mode = 0;
-        int count = 0;
+		int mostFrequent = 0;
+        int cnt = 0;
 		int mode_max = 0;
-		
-		boolean flag = false;	 
-		
+		boolean foundFrequent = false;
+
 		for (int i = min + 4000; i <= max + 4000; i++) {
-			if (numbers[i] > 0) {
-				if (count < (N + 1) / 2) {
-					count += numbers[i];
+			if (numbers[i] != 0) {
+				// 중간값 계산
+				if (cnt < (N + 1) / 2) {
+					cnt += numbers[i];
 					median = i - 4000;
 				}
+				// 최빈값 계산
 				if (mode_max < numbers[i]) {
+					foundFrequent = true;
 					mode_max = numbers[i];
-					mode = i - 4000;
-					flag = true;
-				} else if (mode_max == numbers[i] && flag == true) {
-					mode = i - 4000;
-					flag = false;					
+					mostFrequent = i - 4000;
+				} else if (mode_max == numbers[i] && foundFrequent == true) {
+					foundFrequent = false;	
+					mostFrequent = i - 4000;				
 				}
 			}
 		}
 		
-		System.out.println((int)Math.round((double)sum / N));
+		System.out.println((int)Math.round((float)sum / N));
 		System.out.println(median);
-		System.out.println(mode);
+		System.out.println(mostFrequent);
 		System.out.println(max - min);
 	}
 }
