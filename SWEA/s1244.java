@@ -1,34 +1,49 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.StringTokenizer;
-import java.util.stream.IntStream;
+import java.io.*;
+import java.util.*;
 
 public class s1244 {
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int tc = Integer.parseInt(br.readLine());
-        for (int i = 1; i <= tc; i++) {
-            StringTokenizer st = new StringTokenizer(br.readLine());
-            int num = Integer.parseInt(st.nextToken());
-            int change = Integer.parseInt(st.nextToken());
-            int maximum = getMaxByChange(Integer.toString(num), change);
-            System.out.println("#" + i + " " + maximum);
-        }
-    }
+	public static int numArr[];
+	public static int result;
+	public static int count;
 
-    public int getMaxByChange(String num, int change) {
-        if (num.length() == 2) {
-            if (change % 2 == 1) {
-                String prefix = num.substring(0, 1);
-                String suffix = num.substring(1);
-                return Integer.parseInt(prefix + suffix);
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+		int TC = Integer.parseInt(br.readLine());
+		for (int tc = 1; tc <= TC; tc++) {
+			st = new StringTokenizer(br.readLine());
+			String str = st.nextToken();
+			numArr = new int[str.length()];
+			result = 0;
+			for (int i = 0; i < str.length(); i++) {
+				numArr[i] = str.charAt(i) - '0';
             }
-            return Integer.parseInt(num);
-        }
-        
-        
-    }
+			count = Integer.parseInt(st.nextToken());
+			count = count > str.length() ? str.length() - 1 : count;
+			selectionSort(0, 0);
+			
+            System.out.println("#" + tc + " " + result);
+		}
+	}
+
+	public static void selectionSort(int s, int e) {
+		if (e == count) {
+			result = Math.max(result, Integer.parseInt(Arrays.toString(numArr).replaceAll("[^0-9]", "")));
+			return;
+		}
+		for (int i = s; i < numArr.length - 1; i++) {
+			for (int j = i + 1; j < numArr.length; j++) {
+				int t;
+				t = numArr[i];
+				numArr[i] = numArr[j];
+				numArr[j] = t;
+				
+				selectionSort(i, e + 1);
+				
+				t = numArr[i];
+				numArr[i] = numArr[j];
+				numArr[j] = t;
+			}
+		}
+	}
 }
