@@ -20,9 +20,9 @@ public class a1620 {
             String s = br.readLine();
             try {
                 int q = Integer.parseInt(s);
-                sb.append(intStr[q]+"\n");
+                sb.append(intStr[q]).append("\n");
             } catch (Exception e) {
-                sb.append(strInt.get(s)+"\n");
+                sb.append(strInt.get(s)).append("\n"ß);
             }
         }
         sb.setLength(sb.length()-1);
