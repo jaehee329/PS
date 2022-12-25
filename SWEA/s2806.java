@@ -1,9 +1,7 @@
-// 배치 가능 여부 배열을 2차원이 아닌 1차원으로 한다.
-// 인덱스+1는 열, 값+1은 행
-// 4*4의 배치를 [2, 0, 3, 1]로 표현하면 1열 3행, 2열 1행, 3열 4행, 4열 2행을 의미
+// BOJ 9663 N-Queen과 동일 문제
 import java.io.*;
 
-public class a9663 {
+public class s2806 {
 
     private static int[] position;
     private static int N;
@@ -11,11 +9,14 @@ public class a9663 {
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		N = Integer.parseInt(br.readLine());
-		cnt = 0;
-		position = new int[N];
-		nQueen(0);
-		System.out.println(cnt);
+        int tc = Integer.parseInt(br.readLine());
+        for (int i = 1; i <= tc; i++) {
+            N = Integer.parseInt(br.readLine());
+            cnt = 0;
+            position = new int[N];
+            nQueen(0);
+            System.out.println("#" + i + " " + cnt);
+        }
     }
 
     private static void nQueen(int col) {
