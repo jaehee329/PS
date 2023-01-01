@@ -12,14 +12,19 @@ public class SegmentTree {
     private static final int SIZE = 12;
     private static final int START_IDX = 3;
     private static final int END_IDX = 7;
+    private static final int UPDATE_IDX = 5;
+    private static final int UPDATE_INTO = 1;
     private static int[] segmentTree;
 
     public static void main(String[] args) {
         init();
         System.out.println("Partial sum of start idx = " + START_IDX + " end idx = " + END_IDX + " is = " + partialSum(START_IDX, END_IDX));
+
+        update(UPDATE_IDX, UPDATE_INTO);
+        System.out.println("\nPartial sum after update = " + partialSum(START_IDX, END_IDX));
     }
 
-    private static void init() {
+    public static void init() {
         segmentTree = new int[getSize(SIZE)];
         add(0, SIZE - 1, 1);
     }
@@ -37,7 +42,7 @@ public class SegmentTree {
         return segmentTree[root] = add(start, mid, root * 2) + add(mid + 1, end, root * 2 + 1);
     }
 
-    private static int partialSum(int startInclusive, int endNotInclusive) {
+    public static int partialSum(int startInclusive, int endNotInclusive) {
         return sum(0, SIZE - 1, 1, startInclusive, endNotInclusive);
     }
 
@@ -50,5 +55,23 @@ public class SegmentTree {
         }
         int mid = (start + end) / 2;
         return sum(start, mid, root * 2, left, right) + sum(mid + 1, end, root * 2 + 1, left, right);
+    }
+
+    public static void update(int idx, int changeInto) {
+        int diff = changeInto - elements[idx];
+        change(0, SIZE - 1, 1, idx, diff);
+    }
+
+    private static void change(int start, int end, int root, int idx, int diff) {
+        if (idx < start || idx > end) {
+            return;
+        }
+        segmentTree[root] += diff;
+        if (start == end) {
+            return;
+        }
+        int mid = (start + end) / 2;
+        change(start, mid, root * 2, idx, diff);
+        change(mid + 1, end, root * 2 + 1, idx, diff);
     }
 }
