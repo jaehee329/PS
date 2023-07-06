@@ -1,5 +1,3 @@
-package Baekjoon.Simulation;
-
 import java.io.*;
 import java.util.*;
 
